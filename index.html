@@ -6,12 +6,10 @@
     <title>被耽誤的炒麵店 - 加盟合作專區</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- 引入 Zen Maru Gothic 作為全站主字體 -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap');
         
         body {
-            /* 全站套用 Zen Maru Gothic，模擬內海字體的手寫圓潤感 */
             font-family: 'Zen Maru Gothic', sans-serif;
             scroll-behavior: smooth;
             color: #333;
@@ -22,7 +20,6 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        /* 滾動淡入效果 */
         .fade-in-up {
             opacity: 0;
             transform: translateY(30px);
@@ -34,7 +31,6 @@
             transform: translateY(0);
         }
 
-        /* 特色區塊樣式 */
         .advantage-card {
             transition: all 0.3s ease;
             border: 1px solid transparent;
@@ -45,13 +41,11 @@
             filter: brightness(0.95);
         }
 
-        /* 指定四個區塊的柔和背景色 */
-        .bg-advantage-1 { background-color: #FFF9E6; } /* 柔和金 */
-        .bg-advantage-2 { background-color: #F0F7FF; } /* 清新藍 */
-        .bg-advantage-3 { background-color: #F2FAF2; } /* 天然綠 */
-        .bg-advantage-4 { background-color: #FFF5F5; } /* 溫暖紅 */
+        .bg-advantage-1 { background-color: #FFF9E6; }
+        .bg-advantage-2 { background-color: #F0F7FF; }
+        .bg-advantage-3 { background-color: #F2FAF2; }
+        .bg-advantage-4 { background-color: #FFF5F5; }
 
-        /* 加盟流程步驟線 */
         .process-line {
             position: absolute;
             top: 24px;
@@ -62,7 +56,6 @@
             z-index: 0;
         }
 
-        /* 表單輸入框樣式 */
         .form-input {
             width: 100%;
             padding: 0.85rem;
@@ -83,11 +76,9 @@
         .text-gold { color: #d97706; }
         .border-gold { border-color: #d97706; }
 
-        /* 手機版選單 */
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
             transform: translateX(100%);
-            font-family: 'Zen Maru Gothic', sans-serif;
         }
         #mobile-menu.open {
             transform: translateX(0);
@@ -101,20 +92,43 @@
             font-size: 0.75rem;
         }
 
-        /* 背景圖樣式 */
+        /* 背景圖優化：使用 contain 確保手機看到完整圖片 */
         .hero-banner {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                        url('https://s3-ap-northeast-1.amazonaws.com/ichef-images/73943b1a-833a-4fa9-9f6f-1a169f1a692d/c5b61484-9e98-11ee-879b-0242ac110003.jpeg?channel=online-restaurant');
-            background-size: cover;
+            position: relative;
+            background-image: url('https://s3-ap-northeast-1.amazonaws.com/ichef-images/73943b1a-833a-4fa9-9f6f-1a169f1a692d/c5b61484-9e98-11ee-879b-0242ac110003.jpeg?channel=online-restaurant');
+            background-repeat: no-repeat;
             background-position: center;
-            background-attachment: fixed;
+            background-color: #000; /* 背景填黑確保不留白邊 */
+        }
+
+        /* 桌面版：使用 cover 以達到填滿美感 */
+        @media (min-width: 768px) {
+            .hero-banner {
+                background-size: cover;
+                background-attachment: fixed;
+            }
+        }
+
+        /* 手機版：使用 contain 確保圖不被裁切 */
+        @media (max-width: 767px) {
+            .hero-banner {
+                background-size: contain;
+                height: 60vh; /* 縮小高度適合手機瀏覽 */
+            }
+        }
+
+        /* 50% 遮罩層 */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
 
         .shadow-text {
             text-shadow: 0 2px 15px rgba(0,0,0,0.6);
         }
 
-        /* 加強標題與重點文字的視覺權重 */
         h1, h2, h3, .font-bold {
             font-weight: 700;
         }
@@ -122,7 +136,6 @@
 </head>
 <body class="bg-white">
 
-    <!-- 導航欄 -->
     <nav id="navbar" class="fixed w-full z-[100] transition-all duration-300 py-4 px-6 md:px-16 flex justify-between items-center bg-transparent">
         <div class="h-10 md:h-12 flex items-center">
             <div class="text-2xl font-bold text-gold tracking-widest flex items-center shadow-text">
@@ -131,7 +144,6 @@
             </div>
         </div>
         
-        <!-- 桌面版連結 -->
         <div id="nav-links" class="hidden md:flex space-x-10 font-bold text-sm tracking-widest text-white">
             <a href="#story" class="hover:text-gold transition shadow-text">故事的開始</a>
             <a href="#products" class="hover:text-gold transition shadow-text">產品介紹</a>
@@ -145,7 +157,6 @@
         </button>
     </nav>
 
-    <!-- 手機版側欄選單 -->
     <div id="mobile-menu" class="fixed inset-0 bg-white z-[110] flex flex-col p-8 md:hidden">
         <div class="flex justify-end mb-8">
             <button id="menu-close" class="text-3xl"><i class="fas fa-times"></i></button>
@@ -160,7 +171,10 @@
     </div>
 
     <!-- 標頭區塊 -->
-    <section class="relative h-[85vh] md:h-[100vh] flex items-center justify-center overflow-hidden hero-banner">
+    <section class="relative h-[100vh] flex items-center justify-center overflow-hidden hero-banner">
+        <!-- 色彩淡化 50% 遮罩層 -->
+        <div class="hero-overlay"></div>
+        
         <div class="relative z-10 text-center text-white px-4 fade-in-up" id="hero-content">
             <p class="text-sm md:text-xl tracking-[0.3em] mb-4 shadow-text font-bold text-orange-200 uppercase">日式炒麵・揚げ物・飲料</p>
             <h1 class="text-4xl md:text-7xl font-black tracking-widest mb-6 shadow-text">被耽誤的炒麵店</h1>
@@ -176,7 +190,6 @@
         </div>
     </section>
 
-    <!-- 品牌故事區 -->
     <section id="story" class="py-24 px-6 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div class="fade-in-up">
@@ -190,9 +203,8 @@
                 <h2 class="text-3xl font-bold tracking-widest mb-6">故事的開始</h2>
                 <div class="w-12 h-1 bg-gold mb-8"></div>
                 <p class="text-gray-600 leading-loose tracking-widest mb-6 font-medium">
-                    創立於2017年。米庫是母親的名字，傳承母親所教導的部落獨有烹飪技巧，運用在我們熟悉的食物中，增添不一樣的風采，我們位於新竹高工旁的巷弄中，寧靜中充滿元氣的日式簡約風早午餐食堂。
+                    創立於2017年。米庫是母親的名字，傳承母親所教導的部落獨有烹飪技巧，運用在我們熟悉的食物中，增添不一樣的風采。
                 </p>
-                <!-- 特別加大的標語 -->
                 <p class="text-gold text-3xl md:text-4xl leading-relaxed mb-8 font-black">
                     「搖身一變，炒麵の逆襲 」
                 </p>
@@ -203,7 +215,6 @@
         </div>
     </section>
 
-    <!-- 產品介紹區 -->
     <section id="products" class="py-24 bg-gray-50 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 fade-in-up">
@@ -212,48 +223,36 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- 塔香辣炒麵 -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-sm fade-in-up">
                     <div class="h-48 overflow-hidden">
-                        <img src="https://s3-ap-northeast-1.amazonaws.com/ichef-images/30cde42d-7797-467d-836a-5aa318093090/online_restaurant_default/75da419f-1eac-4adf-8b9d-9054b66c39be.jpg?channel=online-restaurant" 
-                             alt="" 
-                             class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                        <img src="https://s3-ap-northeast-1.amazonaws.com/ichef-images/30cde42d-7797-467d-836a-5aa318093090/online_restaurant_default/75da419f-1eac-4adf-8b9d-9054b66c39be.jpg?channel=online-restaurant" alt="" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 text-center">
                         <span class="product-tag mb-2 inline-block font-bold">網友熱推</span>
                         <h4 class="font-bold text-lg mb-2">塔香辣炒麵</h4>
                     </div>
                 </div>
-                <!-- 日式和風炒麵 -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-sm fade-in-up" style="transition-delay: 0.1s;">
                     <div class="h-48 overflow-hidden">
-                        <img src="https://s3-ap-northeast-1.amazonaws.com/ichef-images/30cde42d-7797-467d-836a-5aa318093090/online_restaurant_default/6905a899-fcb4-41ce-bdd8-1c2df3a7bb63.jpg?channel=online-restaurant" 
-                             alt="" 
-                             class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                        <img src="https://s3-ap-northeast-1.amazonaws.com/ichef-images/30cde42d-7797-467d-836a-5aa318093090/online_restaurant_default/6905a899-fcb4-41ce-bdd8-1c2df3a7bb63.jpg?channel=online-restaurant" alt="" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 text-center">
                         <span class="product-tag mb-2 inline-block font-bold">經典美味</span>
                         <h4 class="font-bold text-lg mb-2">日式和風炒麵</h4>
                     </div>
                 </div>
-                <!-- 唐揚雞炒麵 -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-sm fade-in-up" style="transition-delay: 0.2s;">
                     <div class="h-48 overflow-hidden">
-                        <img src="https://s3-ap-northeast-1.amazonaws.com/ichef-images/30cde42d-7797-467d-836a-5aa318093090/online_restaurant_default/9c725c30-9038-42b8-86bf-2734bd3ab4b5.jpg?channel=online-restaurant" 
-                             alt="" 
-                             class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                        <img src="https://s3-ap-northeast-1.amazonaws.com/ichef-images/30cde42d-7797-467d-836a-5aa318093090/online_restaurant_default/9c725c30-9038-42b8-86bf-2734bd3ab4b5.jpg?channel=online-restaurant" alt="" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 text-center">
                         <span class="product-tag mb-2 inline-block font-bold">招牌必點</span>
                         <h4 class="font-bold text-lg mb-2">唐揚雞炒麵</h4>
                     </div>
                 </div>
-                <!-- 明太子炒麵 -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-sm fade-in-up" style="transition-delay: 0.3s;">
                     <div class="h-48 overflow-hidden">
-                        <img src="https://s3-ap-northeast-1.amazonaws.com/ichef-images/30cde42d-7797-467d-836a-5aa318093090/online_restaurant_default/3824e451-b061-48a8-8010-243031bf09d5.jpg?channel=online-restaurant" 
-                             alt="" 
-                             class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                        <img src="https://s3-ap-northeast-1.amazonaws.com/ichef-images/30cde42d-7797-467d-836a-5aa318093090/online_restaurant_default/3824e451-b061-48a8-8010-243031bf09d5.jpg?channel=online-restaurant" alt="" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 text-center">
                         <span class="product-tag mb-2 inline-block font-bold">特色推薦</span>
@@ -264,78 +263,44 @@
         </div>
     </section>
 
-    <!-- 加盟優勢區 -->
     <section id="advantages" class="py-24 px-6 max-w-7xl mx-auto">
         <div class="text-center mb-16 fade-in-up">
             <h2 class="text-3xl font-bold tracking-widest mb-6">加盟優勢</h2>
             <div class="max-w-3xl mx-auto space-y-4">
-                <p class="text-gray-600 leading-relaxed font-medium">
-                    源自於米庫早午餐系列創業起家，由於炒麵深受廣大民眾喜愛，被冠上被耽誤的炒麵店稱號!
-                </p>
-                <p class="text-gray-600 leading-relaxed font-medium">
-                    用一碗日式炒麵，讓每個人都能擁有超越日常的簡單幸福。
-                </p>
-                <p class="text-gray-600 leading-relaxed font-medium">
-                    秉持著品牌「部落之情、美食之意」的精神，對餐飲以及管理有熱忱的你，歡迎一起加入被耽誤的炒麵店。
-                </p>
+                <p class="text-gray-600 leading-relaxed font-medium">源自於米庫早午餐系列創業起家，由於炒麵深受廣大民眾喜愛，被冠上被耽誤的炒麵店稱號!</p>
+                <p class="text-gray-600 leading-relaxed font-medium">用一碗日式炒麵，讓每個人都能擁有超越日常的簡單幸福。</p>
             </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
-            <!-- 精簡人力 -->
             <div class="advantage-card bg-advantage-1 text-center p-8 rounded-xl fade-in-up border border-gray-100 shadow-sm">
-                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
-                    <i class="fas fa-users-gear text-2xl text-gold"></i>
-                </div>
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-users-gear text-2xl text-gold"></i></div>
                 <h3 class="font-bold mb-4 text-lg">精簡人力</h3>
-                <p class="text-gray-500 text-sm leading-relaxed font-medium">
-                    輕創業，空間規劃結合人事費用分配共同考量，以最優化的空間創造最有效的人事分配及獲利。
-                </p>
+                <p class="text-gray-500 text-sm leading-relaxed font-medium">優化空間與人事獲利分配。</p>
             </div>
-
-            <!-- 獨特品牌形象 -->
             <div class="advantage-card bg-advantage-2 text-center p-8 rounded-xl fade-in-up border border-gray-100 shadow-sm" style="transition-delay: 0.1s;">
-                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
-                    <i class="fas fa-store text-2xl text-gold"></i>
-                </div>
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-store text-2xl text-gold"></i></div>
                 <h3 class="font-bold mb-4 text-lg">獨特品牌形象</h3>
-                <p class="text-gray-500 text-sm leading-relaxed font-medium">
-                    競爭對手較少的產品，搭配日式簡約裝潢風格，刻畫出品牌獨特又相當應景的記憶點。
-                </p>
+                <p class="text-gray-500 text-sm leading-relaxed font-medium">日式簡約風格，建立獨特記憶點。</p>
             </div>
-
-            <!-- 嚴選新鮮食材 -->
             <div class="advantage-card bg-advantage-3 text-center p-8 rounded-xl fade-in-up border border-gray-100 shadow-sm" style="transition-delay: 0.2s;">
-                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
-                    <i class="fas fa-leaf text-2xl text-gold"></i>
-                </div>
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-leaf text-2xl text-gold"></i></div>
                 <h3 class="font-bold mb-4 text-lg">嚴選新鮮食材</h3>
-                <p class="text-gray-500 text-sm leading-relaxed font-medium">
-                    種類單一口味卻能多變化，吃得安心也很重要，產品CP值高，我們更重視消費者的健康。
-                </p>
+                <p class="text-gray-500 text-sm leading-relaxed font-medium">重視健康與產品 CP 值。</p>
             </div>
-
-            <!-- 專業教育訓練 -->
             <div class="advantage-card bg-advantage-4 text-center p-8 rounded-xl fade-in-up border border-gray-100 shadow-sm" style="transition-delay: 0.3s;">
-                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
-                    <i class="fas fa-graduation-cap text-2xl text-gold"></i>
-                </div>
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-graduation-cap text-2xl text-gold"></i></div>
                 <h3 class="font-bold mb-4 text-lg">專業教育訓練</h3>
-                <p class="text-gray-500 text-sm leading-relaxed font-medium">
-                    共創美好的未來，協助夥伴，秉持誠信原則，團隊共創未來。
-                </p>
+                <p class="text-gray-500 text-sm leading-relaxed font-medium">誠信原則，團隊共創未來。</p>
             </div>
         </div>
     </section>
 
-    <!-- 加盟流程區 -->
     <section id="process" class="py-24 bg-white px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20 fade-in-up">
                 <h2 class="text-3xl font-bold tracking-widest mb-4">加盟流程</h2>
-                <p class="text-gray-400 text-sm tracking-widest uppercase font-bold">Franchise Process</p>
             </div>
-
             <div class="relative">
                 <div class="hidden md:block process-line"></div>
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-12 relative z-10">
@@ -353,7 +318,7 @@
                     </div>
                     <div class="text-center fade-in-up" style="transition-delay: 0.3s;">
                         <div class="w-12 h-12 bg-gold text-white rounded-full flex items-center justify-center mx-auto mb-6 font-black shadow-lg">04</div>
-                        <h4 class="font-bold mb-2 text-sm md:text-base">簽約與裝潢</h4>
+                        <h4 class="font-bold mb-2 text-sm md:text-base">簽約裝潢</h4>
                     </div>
                     <div class="text-center fade-in-up" style="transition-delay: 0.4s;">
                         <div class="w-12 h-12 bg-gold text-white rounded-full flex items-center justify-center mx-auto mb-6 font-black shadow-lg">05</div>
@@ -364,27 +329,24 @@
         </div>
     </section>
 
-    <!-- 加盟表單區 -->
     <section id="form" class="py-24 px-6 max-w-4xl mx-auto">
         <div class="text-center mb-16 fade-in-up">
             <h2 class="text-3xl font-bold tracking-widest mb-4">加入我們</h2>
-            <p class="text-gray-400 text-sm tracking-widest uppercase font-bold">Join Our Team</p>
         </div>
-
         <form id="franchiseForm" class="space-y-8 fade-in-up bg-white p-8 border border-gray-100 rounded-lg shadow-sm">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <label class="block text-xs font-bold tracking-widest mb-3 uppercase">姓名 Name *</label>
-                    <input type="text" required class="form-input" placeholder="請輸入您的姓名">
+                    <label class="block text-xs font-bold mb-3 uppercase">姓名 Name *</label>
+                    <input type="text" required class="form-input">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold tracking-widest mb-3 uppercase">電話 Phone *</label>
-                    <input type="tel" required class="form-input" placeholder="請輸入聯絡電話">
+                    <label class="block text-xs font-bold mb-3 uppercase">電話 Phone *</label>
+                    <input type="tel" required class="form-input">
                 </div>
             </div>
             <div>
-                <label class="block text-xs font-bold tracking-widest mb-3 uppercase">有意加盟地區 Area</label>
-                <input type="text" class="form-input" placeholder="例如：新竹市東區">
+                <label class="block text-xs font-bold mb-3 uppercase">有意加盟地區 Area</label>
+                <input type="text" class="form-input">
             </div>
             <div class="text-center pt-6">
                 <button type="submit" class="bg-gold text-white px-16 py-4 rounded font-bold tracking-widest hover:bg-orange-700 transition-all shadow-lg">
@@ -394,18 +356,14 @@
         </form>
     </section>
 
-    <!-- 頁尾 -->
     <footer class="bg-[#1a1a1a] text-white py-12 px-6 text-center">
         <div class="max-w-7xl mx-auto">
             <div class="text-2xl font-bold tracking-widest mb-4 text-gold">被耽誤的炒麵店</div>
-            <p class="text-gray-500 text-[10px] tracking-widest uppercase font-bold">
-                COPYRIGHT © 2024 被耽誤的炒麵店 (米庫早午餐系列). ALL RIGHTS RESERVED.
-            </p>
+            <p class="text-gray-500 text-[10px] tracking-widest uppercase font-bold">COPYRIGHT © 2024 ALL RIGHTS RESERVED.</p>
         </div>
     </footer>
 
     <script>
-        // 導航欄滾動效果
         const navbar = document.getElementById('navbar');
         const navLinks = document.getElementById('nav-links');
         
@@ -423,7 +381,6 @@
             }
         });
 
-        // 側欄選單
         const menuOpen = document.getElementById('menu-open');
         const menuClose = document.getElementById('menu-close');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -431,18 +388,14 @@
         menuOpen.onclick = () => mobileMenu.classList.add('open');
         menuClose.onclick = () => mobileMenu.classList.remove('open');
 
-        // 滾動動畫
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 
-        // 表單提交
         document.getElementById('franchiseForm').onsubmit = (e) => {
             e.preventDefault();
             const msg = document.createElement('div');
@@ -450,7 +403,6 @@
             msg.innerHTML = `
                 <i class="fas fa-check-circle text-gold text-5xl mb-4"></i>
                 <h3 class="text-xl font-bold mb-4">感謝您的申請！</h3>
-                <p class="text-gray-600">我們將儘快指派加盟專員與您聯繫。</p>
                 <button onclick="this.parentElement.remove()" class="mt-8 bg-gold text-white px-8 py-2 rounded-full w-full font-bold">確認</button>
             `;
             document.body.appendChild(msg);
