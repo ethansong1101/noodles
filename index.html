@@ -46,16 +46,6 @@
         .bg-advantage-3 { background-color: #F2FAF2; }
         .bg-advantage-4 { background-color: #FFF5F5; }
 
-        .process-line {
-            position: absolute;
-            top: 24px;
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            background: #e5e7eb;
-            z-index: 0;
-        }
-
         .form-input {
             width: 100%;
             padding: 0.85rem;
@@ -101,7 +91,7 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover; 
-            min-height: 70vh; 
+            min-height: 50vh; 
         }
 
         @media (min-width: 768px) {
@@ -124,6 +114,19 @@
 
         h1, h2, h3, .font-bold {
             font-weight: 700;
+        }
+
+        .process-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .process-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0.5rem;
+            color: #d97706;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -185,8 +188,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div class="fade-in-up">
                 <div class="aspect-video bg-gray-50 rounded-lg flex items-center justify-center shadow-inner border border-gray-100 overflow-hidden relative group">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipMqko0kYgFCRb2u_gs6G6xkxY5qM5e2likgG4Ue=s680-w680-h510-rw" 
-                         alt="店面實景" 
+                    <!-- 更新後的店鋪圖片連結 -->
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAFeeYx91G5CEGetknR5EIYl0C_54A-F9N3YD6SjbyfP4G3jPqovMGdPMFOIcHJwrHkDgxSV5EVLsba7vcNFNvaZ0Etq1SfUYJPkYXXdKVukbRMXI6xIJNodP9vmdKmYYwLPZjqWJ90huFaZ=s680-w680-h510-rw" 
+                         alt="被耽誤的炒麵店店鋪實景" 
                          class="object-cover w-full h-full grayscale-[20%] group-hover:grayscale-0 transition duration-700">
                 </div>
             </div>
@@ -206,6 +210,7 @@
         </div>
     </section>
 
+    <!-- 產品介紹、加盟優勢、加盟流程與表單維持不變 -->
     <section id="products" class="py-24 bg-gray-50 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 fade-in-up">
@@ -265,24 +270,24 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
             <div class="advantage-card bg-advantage-1 text-center p-8 rounded-xl fade-in-up border border-gray-100 shadow-sm">
-                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-users-gear text-2xl text-gold"></i></div>
-                <h3 class="font-bold mb-4 text-lg">精簡人力</h3>
-                <p class="text-gray-500 text-sm leading-relaxed font-medium">優化空間與人事獲利分配。</p>
+                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-users-gear text-3xl text-gold"></i></div>
+                <h3 class="font-bold mb-4 text-2xl">精簡人力</h3>
+                <p class="text-gray-500 text-sm leading-relaxed font-medium">輕創業，空間規劃結合人事費用分配共同考量，以最優化的空間創造最有效的人事分配及獲利。</p>
             </div>
             <div class="advantage-card bg-advantage-2 text-center p-8 rounded-xl fade-in-up border border-gray-100 shadow-sm" style="transition-delay: 0.1s;">
-                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-store text-2xl text-gold"></i></div>
-                <h3 class="font-bold mb-4 text-lg">獨特品牌形象</h3>
-                <p class="text-gray-500 text-sm leading-relaxed font-medium">日式簡約風格，建立獨特記憶點。</p>
+                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-store text-3xl text-gold"></i></div>
+                <h3 class="font-bold mb-4 text-2xl">獨特品牌形象</h3>
+                <p class="text-gray-500 text-sm leading-relaxed font-medium">競爭對手較少的產品，搭配日式簡約裝潢風格，刻畫出品牌獨特又相當應景的記憶點。</p>
             </div>
             <div class="advantage-card bg-advantage-3 text-center p-8 rounded-xl fade-in-up border border-gray-100 shadow-sm" style="transition-delay: 0.2s;">
-                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-leaf text-2xl text-gold"></i></div>
-                <h3 class="font-bold mb-4 text-lg">嚴選新鮮食材</h3>
-                <p class="text-gray-500 text-sm leading-relaxed font-medium">重視健康與產品 CP 值。</p>
+                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-leaf text-3xl text-gold"></i></div>
+                <h3 class="font-bold mb-4 text-2xl">嚴選新鮮食材</h3>
+                <p class="text-gray-500 text-sm leading-relaxed font-medium">種類單一口味卻能多變化，吃得安心也很重要，產品CP值高，我們更重視消費著的健康。</p>
             </div>
             <div class="advantage-card bg-advantage-4 text-center p-8 rounded-xl fade-in-up border border-gray-100 shadow-sm" style="transition-delay: 0.3s;">
-                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-graduation-cap text-2xl text-gold"></i></div>
-                <h3 class="font-bold mb-4 text-lg">專業教育訓練</h3>
-                <p class="text-gray-500 text-sm leading-relaxed font-medium">誠信原則，團隊共創未來。</p>
+                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i class="fas fa-graduation-cap text-3xl text-gold"></i></div>
+                <h3 class="font-bold mb-4 text-2xl">專業教育訓練</h3>
+                <p class="text-gray-500 text-sm leading-relaxed font-medium">共創美好的未來，協助夥伴，秉持誠信原則，團隊共創未來。</p>
             </div>
         </div>
     </section>
@@ -294,13 +299,13 @@
                 <div class="w-12 h-1 bg-gold mx-auto"></div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
                 <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-gold fade-in-up">
                     <div class="flex items-center mb-4">
                         <div class="w-10 h-10 bg-gold text-white rounded-full flex items-center justify-center font-black mr-4 shadow-md">01</div>
                         <h4 class="font-bold text-xl tracking-wider">填寫加盟表單</h4>
                     </div>
-                    <p class="text-gray-600 leading-relaxed pl-14">
+                    <p class="text-gray-600 leading-relaxed text-sm">
                         詳細填寫加盟諮詢表單，讓我們能夠在第一時間了解您的需求，量身訂做專屬的創業計畫。
                     </p>
                 </div>
@@ -310,32 +315,79 @@
                         <div class="w-10 h-10 bg-gold text-white rounded-full flex items-center justify-center font-black mr-4 shadow-md">02</div>
                         <h4 class="font-bold text-xl tracking-wider">當面洽談 / 簽約</h4>
                     </div>
-                    <ul class="text-gray-600 leading-relaxed pl-14 space-y-2 list-disc list-inside">
+                    <ul class="text-gray-600 leading-relaxed text-sm space-y-1 list-disc list-inside">
                         <li>加盟說明與經營理念溝通</li>
-                        <li>優先保障加盟區域權益</li>
+                        <li>優先保障加盟區域</li>
                         <li>簽訂加盟意向書</li>
                         <li>收取加盟預約金</li>
                     </ul>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-gray-200 fade-in-up" style="transition-delay: 0.2s;">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-gold fade-in-up" style="transition-delay: 0.2s;">
                     <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-gray-200 text-gray-500 rounded-full flex items-center justify-center font-black mr-4">03</div>
-                        <h4 class="font-bold text-xl tracking-wider text-gray-400">店址確認與裝修</h4>
+                        <div class="w-10 h-10 bg-gold text-white rounded-full flex items-center justify-center font-black mr-4 shadow-md">03</div>
+                        <h4 class="font-bold text-xl tracking-wider">代尋店面 / 商圈評估</h4>
                     </div>
-                    <p class="text-gray-400 leading-relaxed pl-14">
-                        專業團隊協助商圈評估、店面設計裝修，打造品牌一致性美感空間。
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        未有屬意地點，我們協助您尋找合適店面；已有開店地點，為您進行專業評估。
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-gray-200 fade-in-up" style="transition-delay: 0.3s;">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-gold fade-in-up" style="transition-delay: 0.3s;">
                     <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-gray-200 text-gray-500 rounded-full flex items-center justify-center font-black mr-4">04</div>
-                        <h4 class="font-bold text-xl tracking-wider text-gray-400">盛大開幕</h4>
+                        <div class="w-10 h-10 bg-gold text-white rounded-full flex items-center justify-center font-black mr-4 shadow-md">04</div>
+                        <h4 class="font-bold text-xl tracking-wider">簽訂加盟合約書</h4>
                     </div>
-                    <p class="text-gray-400 leading-relaxed pl-14">
-                        完整的技術指導與行銷資源導入，陪您一同開啟創業的第一碗炒麵。
+                    <ul class="process-list text-gray-600 leading-relaxed text-sm">
+                        <li>收取加盟金</li>
+                        <li>收取教育訓練費</li>
+                        <li>收取保證金</li>
+                        <li>收取50%工程款</li>
+                        <li>營業登記辦理</li>
+                        <li>商定受訓時間</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-gold fade-in-up" style="transition-delay: 0.4s;">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-gold text-white rounded-full flex items-center justify-center font-black mr-4 shadow-md">05</div>
+                        <h4 class="font-bold text-xl tracking-wider">教育訓練</h4>
+                    </div>
+                    <ul class="process-list text-gray-600 leading-relaxed text-sm">
+                        <li>開店及打烊作業</li>
+                        <li>服務及廚房作業</li>
+                        <li>原物料進貨管理</li>
+                        <li>經營成本控制</li>
+                        <li>顧客開發與管理</li>
+                        <li>機器設備維護</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-gold fade-in-up" style="transition-delay: 0.5s;">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-gold text-white rounded-full flex items-center justify-center font-black mr-4 shadow-md">06</div>
+                        <h4 class="font-bold text-xl tracking-wider">店舖裝潢施工</h4>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        擁有專屬及專業的設計團隊與工班，量身打造專屬店面，逐步實現夢想。
                     </p>
+                </div>
+
+                <div class="bg-gold p-8 rounded-2xl shadow-lg text-white md:col-span-2 lg:col-span-3 fade-in-up" style="transition-delay: 0.6s;">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <div class="flex items-center mb-6 md:mb-0">
+                            <div class="w-12 h-12 bg-white text-gold rounded-full flex items-center justify-center font-black mr-4 shadow-md text-xl">07</div>
+                            <h4 class="font-bold text-2xl tracking-wider">準備開業</h4>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-2 text-sm opacity-90">
+                            <div>• 通過開店訓練考核</div>
+                            <div>• 店鋪驗收</div>
+                            <div>• 工程款結清</div>
+                            <div>• 收取物料費</div>
+                            <div>• 備料進貨</div>
+                            <div>• 確認 / 清點</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
