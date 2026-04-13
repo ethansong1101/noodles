@@ -6,6 +6,16 @@
     <title>被耽誤的炒麵店 - 加盟合作專區</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- 引入 EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // 初始化 EmailJS
+            emailjs.init({
+              publicKey: "xHxvQvpjV5G6V7EGg", 
+            });
+        })();
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap');
         
@@ -128,6 +138,12 @@
             color: #d97706;
             font-weight: bold;
         }
+
+        /* 按鈕禁用樣式 */
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -188,7 +204,6 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div class="fade-in-up">
                 <div class="aspect-video bg-gray-50 rounded-lg flex items-center justify-center shadow-inner border border-gray-100 overflow-hidden relative group">
-                    <!-- 更新後的店鋪圖片連結 -->
                     <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAFeeYx91G5CEGetknR5EIYl0C_54A-F9N3YD6SjbyfP4G3jPqovMGdPMFOIcHJwrHkDgxSV5EVLsba7vcNFNvaZ0Etq1SfUYJPkYXXdKVukbRMXI6xIJNodP9vmdKmYYwLPZjqWJ90huFaZ=s680-w680-h510-rw" 
                          alt="被耽誤的炒麵店店鋪實景" 
                          class="object-cover w-full h-full grayscale-[20%] group-hover:grayscale-0 transition duration-700">
@@ -210,7 +225,6 @@
         </div>
     </section>
 
-    <!-- 產品介紹、加盟優勢、加盟流程與表單維持不變 -->
     <section id="products" class="py-24 bg-gray-50 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 fade-in-up">
@@ -401,19 +415,27 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                     <label class="block text-xs font-bold mb-3 uppercase">姓名 Name *</label>
-                    <input type="text" required class="form-input" placeholder="請填寫姓名">
+                    <input type="text" name="user_name" id="user_name" required class="form-input" placeholder="請填寫姓名">
                 </div>
                 <div>
                     <label class="block text-xs font-bold mb-3 uppercase">電話 Phone *</label>
-                    <input type="tel" required class="form-input" placeholder="請填寫聯絡電話">
+                    <input type="tel" name="user_phone" id="user_phone" required class="form-input" placeholder="請填寫聯絡電話">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold mb-3 uppercase">LINE ID *</label>
+                    <input type="text" name="user_line" id="user_line" required class="form-input" placeholder="請填寫LINE ID">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold mb-3 uppercase">電子信箱 Email</label>
+                    <input type="email" name="user_email" id="user_email" class="form-input" placeholder="請填寫電子信箱">
                 </div>
             </div>
             <div>
                 <label class="block text-xs font-bold mb-3 uppercase">有意加盟地區 Area</label>
-                <input type="text" class="form-input" placeholder="例如：新竹市東區">
+                <input type="text" name="user_area" id="user_area" class="form-input" placeholder="例如：新竹市東區">
             </div>
             <div class="text-center pt-6">
-                <button type="submit" class="bg-gold text-white px-16 py-4 rounded font-bold tracking-widest hover:bg-orange-700 transition-all shadow-lg">
+                <button type="submit" id="submitBtn" class="bg-gold text-white px-16 py-4 rounded font-bold tracking-widest hover:bg-orange-700 transition-all shadow-lg">
                     送出加盟申請 SEND MESSAGE
                 </button>
             </div>
@@ -460,17 +482,62 @@
 
         document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 
-        document.getElementById('franchiseForm').onsubmit = (e) => {
+        // EmailJS 整合邏輯
+        document.getElementById('franchiseForm').onsubmit = function(e) {
             e.preventDefault();
-            const msg = document.createElement('div');
-            msg.className = "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-10 rounded shadow-2xl z-[200] text-center max-w-sm w-full";
-            msg.innerHTML = `
-                <i class="fas fa-check-circle text-gold text-5xl mb-4"></i>
-                <h3 class="text-xl font-bold mb-4">感謝您的申請！</h3>
-                <button onclick="this.parentElement.remove()" class="mt-8 bg-gold text-white px-8 py-2 rounded-full w-full font-bold">確認</button>
-            `;
-            document.body.appendChild(msg);
-            e.target.reset();
+            
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerText;
+            
+            // 變更按鈕狀態，避免重複點擊
+            btn.disabled = true;
+            btn.innerText = "寄送中 Sending...";
+
+            // 準備發送的資料物件
+            const templateParams = {
+                user_name: document.getElementById('user_name').value,
+                user_phone: document.getElementById('user_phone').value,
+                user_line: document.getElementById('user_line').value,
+                user_email: document.getElementById('user_email').value || "未提供",
+                user_area: document.getElementById('user_area').value
+            };
+
+            // 使用 EmailJS 寄送信件
+            // Service ID, Template ID, Template Params
+            emailjs.send('service_689mcyh', 'template_v1drlxr', templateParams)
+                .then(function() {
+                    // 成功後顯示自定義訊息視窗
+                    const msg = document.createElement('div');
+                    msg.className = "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-10 rounded shadow-2xl z-[200] text-center max-w-sm w-full border-t-4 border-gold";
+                    msg.innerHTML = `
+                        <i class="fas fa-check-circle text-gold text-5xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">感謝您的申請！</h3>
+                        <p class="text-gray-500 text-sm mb-6">我們已收到您的資訊，將會儘速與您聯繫。</p>
+                        <button onclick="this.parentElement.remove()" class="bg-gold text-white px-8 py-2 rounded-full w-full font-bold hover:bg-orange-700 transition">確認</button>
+                    `;
+                    document.body.appendChild(msg);
+                    
+                    // 重置表單與按鈕
+                    document.getElementById('franchiseForm').reset();
+                    btn.disabled = false;
+                    btn.innerText = originalText;
+                }, function(error) {
+                    // 失敗後顯示錯誤訊息
+                    console.error('EmailJS 寄送失敗:', error);
+                    const errorMsg = document.createElement('div');
+                    errorMsg.className = "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-10 rounded shadow-2xl z-[200] text-center max-w-sm w-full border-t-4 border-red-500";
+                    errorMsg.innerHTML = `
+                        <i class="fas fa-exclamation-circle text-red-500 text-5xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">寄送失敗</h3>
+                        <p class="text-gray-500 text-sm mb-6">很抱歉，系統暫時無法處理您的申請。請稍後再試，或直接撥打電話聯繫我們。</p>
+                        <button onclick="this.parentElement.remove()" class="bg-gray-800 text-white px-8 py-2 rounded-full w-full font-bold hover:bg-black transition">關閉</button>
+                    `;
+                    document.body.appendChild(errorMsg);
+                    
+                    // 恢復按鈕
+                    btn.disabled = false;
+                    btn.innerText = originalText;
+                });
         };
 
         window.onload = () => {
