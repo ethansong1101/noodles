@@ -92,42 +92,32 @@
             font-size: 0.75rem;
         }
 
-        /* 背景圖優化：確保填滿黑色區域 */
+        /* 標頭背景圖優化：強制放大填滿所有區域 */
         .hero-banner {
             position: relative;
             background-image: url('https://s3-ap-northeast-1.amazonaws.com/ichef-images/73943b1a-833a-4fa9-9f6f-1a169f1a692d/c5b61484-9e98-11ee-879b-0242ac110003.jpeg?channel=online-restaurant');
             background-repeat: no-repeat;
             background-position: center;
-            background-color: #000;
+            background-size: cover; /* 強制放大填滿 */
+            min-height: 100vh; /* 手機與電腦皆維持全螢幕高度 */
         }
 
-        /* 桌面版：使用 cover 以達到填滿美感 */
         @media (min-width: 768px) {
             .hero-banner {
-                background-size: cover;
-                background-attachment: fixed;
-                min-height: 100vh;
+                background-attachment: fixed; /* 電腦版維持視差效果 */
             }
         }
 
-        /* 手機版：使用 contain 確保圖不被裁切並填滿黑色背景 */
-        @media (max-width: 767px) {
-            .hero-banner {
-                background-size: contain;
-                height: 60vh;
-            }
-        }
-
-        /* 50% 遮罩層 */
+        /* 遮罩層 */
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.4); /* 稍微調淺遮罩讓背景更清晰 */
             z-index: 1;
         }
 
         .shadow-text {
-            text-shadow: 0 2px 15px rgba(0,0,0,0.6);
+            text-shadow: 0 2px 15px rgba(0,0,0,0.8);
         }
 
         h1, h2, h3, .font-bold {
@@ -158,6 +148,7 @@
         </button>
     </nav>
 
+    <!-- 行動版選單 -->
     <div id="mobile-menu" class="fixed inset-0 bg-white z-[110] flex flex-col p-8 md:hidden">
         <div class="flex justify-end mb-8">
             <button id="menu-close" class="text-3xl"><i class="fas fa-times"></i></button>
@@ -171,12 +162,12 @@
         </div>
     </div>
 
-    <!-- 標頭區塊 -->
+    <!-- 標頭區塊：現在已將背景放大至全畫面 -->
     <section class="relative flex items-center justify-center overflow-hidden hero-banner">
         <div class="hero-overlay"></div>
         
         <div class="relative z-10 text-center text-white px-4 fade-in-up" id="hero-content">
-            <p class="text-sm md:text-xl tracking-[0.3em] mb-4 shadow-text font-bold text-orange-200 uppercase">日式炒麵・揚げ物・飲料</p>
+            <p class="text-sm md:text-xl tracking-[0.3em] mb-4 shadow-text font-bold text-orange-200 uppercase">日式炒麵 ・ 揚げ物 ・ 飲料</p>
             <h1 class="text-4xl md:text-7xl font-black tracking-widest mb-6 shadow-text">被耽誤的炒麵店</h1>
             <div class="w-24 h-[4px] bg-gold mx-auto mb-8 shadow-lg"></div>
             <p class="text-lg md:text-2xl font-medium tracking-[0.2em] max-w-2xl mx-auto shadow-text leading-relaxed">
@@ -196,7 +187,7 @@
             <div class="fade-in-up">
                 <div class="aspect-video bg-gray-50 rounded-lg flex items-center justify-center shadow-inner border border-gray-100 overflow-hidden relative group">
                     <img src="https://lh3.googleusercontent.com/p/AF1QipMqko0kYgFCRb2u_gs6G6xkxY5qM5e2likgG4Ue=s680-w680-h510-rw" 
-                         alt="店面照" 
+                         alt="店面實景" 
                          class="object-cover w-full h-full grayscale-[20%] group-hover:grayscale-0 transition duration-700">
                 </div>
             </div>
